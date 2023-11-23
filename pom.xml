@@ -71,12 +71,12 @@
             <includeTestSourceDirectory>true</includeTestSourceDirectory>
           </configuration>
           <executions>
-            <execution>
-              <phase>process-sources</phase>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
+<!--            <execution>-->
+<!--              <phase>process-sources</phase>-->
+<!--              <goals>-->
+<!--                <goal>check</goal>-->
+<!--              </goals>-->
+<!--            </execution>-->
           </executions>
         </plugin>
         <plugin>

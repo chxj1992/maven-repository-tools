@@ -153,9 +153,10 @@ public class MavenRepositoryDeployer
             {
                 // only interested in files using the artifactId-version* pattern
                 // don't bother with .sha1 files
+                String version = gav.getVersion().replace("-SNAPSHOT", "");
                 IOFileFilter fileFilter =
-                    new AndFileFilter( new WildcardFileFilter( gav.getArtifactId() + "-" + gav.getVersion() + "*" ),
-                                       new NotFileFilter( new SuffixFileFilter( "sha1" ) ) );
+                    new AndFileFilter( new WildcardFileFilter( gav.getArtifactId() + "-" + version + "*" ),
+                                       new NotFileFilter( new SuffixFileFilter( "sha1" ) ));
                 Collection<File> artifacts = FileUtils.listFiles( leafDirectory, fileFilter, null );
 
                 Authentication auth = new AuthenticationBuilder().addUsername( username ).addPassword( password )
@@ -211,7 +212,7 @@ public class MavenRepositoryDeployer
                         String classifier =
                             file.getName().substring( gav.getFilenameStart().length() + 1,
                                                       file.getName().length() - ( "." + extension ).length() );
-                        artifact = new DefaultArtifact( g, a, classifier, extension, v );
+                        artifact = new DefaultArtifact( g, a, "", extension, v );
                     }
 
                     if ( artifact != null )
